@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.app.voicechanger">
+
+    <!-- প্রয়োজনীয় পারমিশনসমূহ -->
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="Voice Changer Pro"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
+
+        <!-- ইউজার প্যানেল মেইন অ্যাক্টিভিটি -->
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- অ্যাডমিন প্যানেল ড্যাশবোর্ড অ্যাক্টিভিটি (একই অ্যাপের ভেতরে আলাদা পেজ) -->
+        <activity
+            android:name=".admin.AdminDashboardActivity"
+            android:exported="true" />
+
+        <!-- ব্যাকগ্রাউন্ড অডিও সার্ভিস (ইউজার প্যানেল) -->
+        <service
+            android:name=".audio.AudioStreamService"
+            android:foregroundServiceType="microphone"
+            android:exported="false" />
+
+        <!-- ফ্লোটিং ওভারলে সার্ভিস (ইউজার প্যানেল - ফ্রি ফায়ার গেমের উপরে ভাসমান থাকবে) -->
+        <service
+            android:name=".ui.FloatingOverlayService"
+            android:exported="false" />
+
+    </application>
+</manifest>
